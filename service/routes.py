@@ -75,7 +75,9 @@ def read_account(accountId):
     app.logger.info("Request to Read an Account")
     account=Account.find(accountId)
     if not account :
-        
+        return make_response(
+        {"message":"account not found"}, status.HTTP_404_NOT_FOUND
+        )
     message = account.serialize()
     return make_response(
         jsonify(message), status.HTTP_200_OK

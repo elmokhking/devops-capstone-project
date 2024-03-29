@@ -143,3 +143,9 @@ class TestAccountService(TestCase):
         self.assertEqual(r_account["address"], account.address)
         self.assertEqual(r_account["phone_number"], account.phone_number)
         self.assertEqual(r_account["date_joined"], str(account.date_joined))
+    
+    def  test_account_not_found(self):
+        """IT should return not found"""
+        account_id=0
+        response = self.client.get(f"{BASE_URL}/{account_id}")
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
