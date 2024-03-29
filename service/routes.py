@@ -62,6 +62,15 @@ def create_accounts():
 ######################################################################
 
 # ... place you code here to LIST accounts ...
+@app.route("/accounts", methods=["GET"])
+def list_accounts():
+    """read all accounts"""
+    app.logger.info("Request to List of all accounts")
+    accounts=Account.all()
+    account_list=[account.serialize() for account in accounts]
+    return make_response(
+        jsonify(account_list), status.HTTP_200_OK
+    )
 
 
 ######################################################################
