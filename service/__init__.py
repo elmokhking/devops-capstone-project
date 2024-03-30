@@ -13,7 +13,8 @@ from flask_talisman import Talisman
 # Create Flask application
 app = Flask(__name__)
 
-
+#create talisman
+talisman = Talisman(app)
 
 app.config.from_object(config)
 
