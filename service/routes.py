@@ -57,6 +57,7 @@ def create_accounts():
         jsonify(message), status.HTTP_201_CREATED, {"Location": location_url}
     )
 
+
 ######################################################################
 # LIST ALL ACCOUNTS
 ######################################################################
@@ -66,8 +67,8 @@ def create_accounts():
 def list_accounts():
     """read all accounts"""
     app.logger.info("Request to List of all accounts")
-    accounts=Account.all()
-    account_list=[account.serialize() for account in accounts]
+    accounts = Account.all()
+    account_list = [account.serialize() for account in accounts]
     return make_response(
         jsonify(account_list), status.HTTP_200_OK
     )
@@ -82,16 +83,15 @@ def list_accounts():
 def read_account(accountId):
     """read an account"""
     app.logger.info("Request to Read an Account")
-    account=Account.find(accountId)
-    if not account :
+    account = Account.find(accountId)
+    if not account:
         return make_response(
-        {"message":"account not found"}, status.HTTP_404_NOT_FOUND
-        )
+            {"message": "account not found"}, status.HTTP_404_NOT_FOUND
+            )
     message = account.serialize()
     return make_response(
         jsonify(message), status.HTTP_200_OK
     )
-
 
 
 ######################################################################
@@ -107,11 +107,11 @@ def update_accounts(account_id):
     """
     app.logger.info("Request to update an Account")
     check_content_type("application/json")
-    old_account=Account.find(account_id)
+    old_account = Account.find(account_id)
     if not old_account:
         return make_response(
-        {"message":"account id is not found"}, status.HTTP_404_NOT_FOUND
-        )
+            {"message": "account id is not found"}, status.HTTP_404_NOT_FOUND
+            )
     account = Account()
     account.deserialize(request.get_json())
     account.update()
@@ -119,6 +119,8 @@ def update_accounts(account_id):
     return make_response(
         jsonify(message), status.HTTP_200_OK
     )
+
+
 ######################################################################
 # DELETE AN ACCOUNT
 ######################################################################
@@ -131,7 +133,7 @@ def delete_account(account_id):
     This endpoint will delete an Account
     """
     app.logger.info("Request to delete an Account")
-    account=Account.find(account_id)
+    account = Account.find(account_id)
     if account:
         account.delete()
     return make_response(
