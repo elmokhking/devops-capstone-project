@@ -166,7 +166,7 @@ class TestAccountService(TestCase):
         self.assertEqual(len(r_accounts), 0)
 
     def test_update_account(self):
-        """It should Update a new Account"""
+        """It should Update a new account"""
         account = self._create_accounts(1)[0]
         account.name = "SIMOHAMMED ALAOUI"
         response = self.client.put(
