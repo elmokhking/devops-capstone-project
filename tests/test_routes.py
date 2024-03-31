@@ -11,7 +11,8 @@ from unittest import TestCase
 from tests.factories import AccountFactory
 from service.common import status  # HTTP Status Codes
 from service.models import db, Account, init_db
-from service.routes import app, talisman
+from service.routes import app
+from service import talisman
 
 DATABASE_URI = os.getenv(
     "DATABASE_URI", "postgresql://postgres:postgres@localhost:5432/postgres"
@@ -219,3 +220,8 @@ class TestAccountService(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         for key,value in headers.items():
             self.assertEqual(response.headers.get(key),value)
+    
+    def test_scors_policies(self):
+        """It should check the cors policies"""
+        response = self.client.get(BASE_URL,environ_overrides=HTTPS_ENVIRON)
+        self.assertEqual(response.headers.get("Access-Control-Allow-Origin"),"*")

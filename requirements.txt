@@ -24,6 +24,7 @@ factory-boy==2.12.0
 
 #security
 flask-talisman==1.1.0
+Flask-Cors
 
 # Code Coverage
 coverage==6.3.2
