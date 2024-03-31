@@ -12,8 +12,7 @@ from flask_talisman import Talisman
 from flask_cors import CORS
 # Create Flask application
 app = Flask(__name__)
-
-#create talisman
+# Create talisman
 talisman = Talisman(app)
 CORS(app)
 
